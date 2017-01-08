@@ -3,8 +3,18 @@ export PATH="$HOME/bin:$PATH"
 
 export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
-export HISTCONTROL=ignoredups
-export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+#export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+
+export DISABLE_CORRECTION=true
+
+setopt append_history
+setopt hist_expire_dups_first
+setopt hist_fcntl_lock
+setopt hist_ignore_all_dups
+setopt hist_lex_words
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt share_history
 
 # Prefer US English and use UTF-8
 export LANG="en_US"
@@ -26,21 +36,14 @@ done
 
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-# bind UP and DOWN arrow keys
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
-
 source ~/.zplug/init.zsh
 
-zplug "plugins/git", from:oh-my-zsh, if:"which git", defer:2
-zplug "plugins/rsync", from:oh-my-zsh, if:"which rsync", defer:2
-zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", defer:2
+zplug "robbyrussell/oh-my-zsh", use:"lib/*.zsh"
+zplug "plugins/git", from:oh-my-zsh, if:"which git"
+zplug "plugins/rsync", from:oh-my-zsh, if:"which rsync"
+zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux"
 zplug "plugins/sublime", from:oh-my-zsh
-zplug "plugins/common-aliases", from:oh-my-zsh, defer:2
+zplug "plugins/common-aliases", from:oh-my-zsh
 zplug "plugins/ubuntu", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/extract", from:oh-my-zsh
@@ -50,17 +53,23 @@ zplug "plugins/rbenv", from:oh-my-zsh
 zplug "plugins/mosh", from:oh-my-zsh
 zplug "plugins/httpie", from:oh-my-zsh
 zplug "plugins/history", from:oh-my-zsh
-zplug "plugins/github", from:oh-my-zsh, defer:2
+zplug "plugins/github", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
 zplug "plugins/docker-compose", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/bgnotify", from:oh-my-zsh
 zplug "plugins/ssh-agent", from:oh-my-zsh
+zplug "plugins/gpg-agent", from:oh-my-zsh
 
-zplug "knu/z", use:z.sh, defer:2
-zplug "rimraf/k", use:k.sh
-zplug "zsh-users/zsh-completions", defer:3
+zplug "djui/alias-tips"
+zplug "so-fancy/diff-so-fancy", as:command
+
+zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
+zplug "zsh-users/zsh-completions", defer:3
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
+
+
 
 zplug "themes/tjkirch_mod", from:oh-my-zsh, as:theme
 
@@ -73,12 +82,17 @@ zplug "junegunn/fzf-bin", \
 zplug "github/hub", \
   from:gh-r, \
   as:command, \
-  rename-to:hub, \
-  use:"*Linux*64-bit*"
+  from:gh-r, \
+  use:"*linux*amd64*", \
+  hook-build:"ln -sf $ZPLUG_HOME/repos/github/hub/hub-linux-amd64-*/etc/{hub.zsh_completion,_hub}"
+  zplug "so-fancy/diff-so-fancy", as:command
+
+command -v hub >/dev/null 2>&1 && eval "$(hub alias -s)"
+fpath=($ZPLUG_HOME/repos/github/hub/hub-linux-amd64-2.2.9/etc/ $fpath)
 
 # Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-  printf "Install? [y/N]: "
+if ! zplug check; then
+  printf "Zplug plugins list has been changed.\nInstall? [y/N]: "
   if read -q; then
     echo; zplug install
   fi
@@ -86,3 +100,20 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load
+
+compinit
+
+if zplug check zsh-users/zsh-autosuggestions; then
+  ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down) # Add history-substring-search-* widgets to list of widgets that clear the autosuggestion
+  ZSH_AUTOSUGGEST_CLEAR_WIDGETS=("${(@)ZSH_AUTOSUGGEST_CLEAR_WIDGETS:#(up|down)-line-or-history}") # Remove *-line-or-history widgets from list of widgets that clear the autosuggestion to avoid conflict with history-substring-search-* widgets
+fi
+
+# Bind UP and DOWN arrow keys for subsstring search.
+if zplug check zsh-users/zsh-history-substring-search; then
+  zmodload zsh/terminfo
+  bindkey "$terminfo[cuu1]" history-substring-search-up
+  bindkey "$terminfo[cud1]" history-substring-search-down
+fi
+
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
