@@ -69,8 +69,6 @@ zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "zsh-users/zsh-completions", defer:3
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
-
-
 zplug "themes/tjkirch_mod", from:oh-my-zsh, as:theme
 
 zplug "junegunn/fzf-bin", \
@@ -102,6 +100,9 @@ fi
 zplug load
 
 compinit
+
+# Disable clock on right side of shell prompt
+export RPROMPT=""
 
 if zplug check zsh-users/zsh-autosuggestions; then
   ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down) # Add history-substring-search-* widgets to list of widgets that clear the autosuggestion
