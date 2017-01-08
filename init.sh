@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -e
-set -x
 
 SOFTWARE=""
 
@@ -24,17 +23,22 @@ SOFTWARE="$SOFTWARE sublime-text-installer"
 SOFTWARE="$SOFTWARE traceroute tcptraceroute iotop htop mosh gpa meld git zsh python-pip curl httpie xclip grc ccache"
 
 # And now install 'em all
-sudo apt-get update
-sudo apt-get install -y $SOFTWARE
+sudo apt-get -qq update
+sudo apt-get -qq install -y $SOFTWARE
 
 # Install not apt-ed software
-sudo -H pip --disable-pip-version-check install ansible==2.2.0.0 ansible-lint
+sudo -H pip -q --disable-pip-version-check install ansible==2.2.0.0 ansible-lint speedtest-cli
 
 # Bash? Who need a bash in 21 century?!
 [ $SHELL != `which zsh` ] && chsh -s `which zsh` $USER
 
 # You now... For security
-[ -s ~/.ssh/id_rsa ] || ssh-keygen -q -b 4096 -t rsa -f ~/.ssh/id_rsa
-[ -s ~/.ssh/id_ecdsa ] || ssh-keygen -q -t ecdsa -f ~/.ssh/id_ecdsa
+[ ! -s ~/.ssh/id_rsa ] && ssh-keygen -q -b 4096 -t rsa -f ~/.ssh/id_rsa
+[ ! -s ~/.ssh/id_ecdsa ] && ssh-keygen -q -t ecdsa -f ~/.ssh/id_ecdsa
 
-mkdir ~/bin
+[ ! -d ~/bin ] && mkdir ~/bin
+
+~/.dotfiles/install
+
+echo "Bootstraped"
+exit 0
