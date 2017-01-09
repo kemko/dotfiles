@@ -3,7 +3,7 @@ export PATH="$HOME/bin:$PATH"
 
 export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
-#export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
 export DISABLE_CORRECTION=true
 
