@@ -7,7 +7,7 @@
   - ~/.*'
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
+  - [git submodule update --init --recursive --remote, Installing submodules]
   - [mkdir -p rbenv/plugins, create rbenv/plugins]
 
 - link:
