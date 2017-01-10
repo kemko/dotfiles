@@ -64,7 +64,6 @@ zplug "plugins/gpg-agent", from:oh-my-zsh
 zplug "djui/alias-tips"
 zplug "so-fancy/diff-so-fancy", as:command
 
-zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "zsh-users/zsh-completions", defer:3
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
@@ -82,11 +81,8 @@ zplug "github/hub", \
   as:command, \
   from:gh-r, \
   use:"*linux*amd64*", \
-  hook-build:"ln -sf $ZPLUG_HOME/repos/github/hub/hub-linux-amd64-*/etc/{hub.zsh_completion,_hub}"
-  zplug "so-fancy/diff-so-fancy", as:command
-
+  hook-build:"ln -sf $ZPLUG_HOME/repos/github/hub/hub-linux-amd64-*/etc/{hub.zsh_completion,_hub} && ln -sf $ZPLUG_HOME/repos/github/hub/hub-linux-amd64-*/hub $ZPLUG_HOME/bin"
 command -v hub >/dev/null 2>&1 && eval "$(hub alias -s)"
-fpath=($ZPLUG_HOME/repos/github/hub/hub-linux-amd64-2.2.9/etc/ $fpath)
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check; then
