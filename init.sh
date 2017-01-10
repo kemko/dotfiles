@@ -20,7 +20,7 @@ sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
 SOFTWARE="$SOFTWARE sublime-text-installer"
 
 # All other stuff from standard repos
-SOFTWARE="$SOFTWARE traceroute tcptraceroute iotop htop mosh gpa meld git zsh python-pip curl httpie xclip grc ccache"
+SOFTWARE="$SOFTWARE traceroute tcptraceroute iotop htop mosh gpa meld git zsh python-pip curl httpie xclip grc ccache libssl-dev libreadline-dev zlib1g-dev build-essential"
 
 # And now install 'em all
 sudo apt-get -qq update
