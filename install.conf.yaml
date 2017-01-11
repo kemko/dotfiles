@@ -7,6 +7,7 @@
   - ~/.*'
 
 - shell:
+  - [git reset --hard && git pull --rebase]
   - [git submodule update --init --recursive --remote, Installing submodules]
   - [mkdir -p rbenv/plugins, create rbenv/plugins]
 
