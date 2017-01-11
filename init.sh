@@ -5,7 +5,7 @@ set -e
 SOFTWARE=""
 
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-echo "deb http://download.virtualbox.org/virtualbox/debian xenial contrib" | sudo tee /etc/apt/sources.list.d/oracle-virtualbox.list
+echo "deb http://download.virtualbox.org/virtualbox/debian yakkety contrib" | sudo tee /etc/apt/sources.list.d/oracle-virtualbox.list
 SOFTWARE="$SOFTWARE virtualbox-5.1 dkms"
 
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
