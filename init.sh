@@ -28,10 +28,10 @@ SOFTWARE="$SOFTWARE traceroute tcptraceroute iotop htop mosh gpa meld git zsh py
 
 # And now install 'em all
 sudo apt-get -qq update
-sudo apt-get -qq install -y $SOFTWARE
+sudo apt-get install -y $SOFTWARE
 
 # Install not apt-ed software
-sudo -H pip -q --disable-pip-version-check install ansible==2.2.0.0 ansible-lint speedtest-cli
+sudo -H pip -q --disable-pip-version-check install ansible==2.2.1.0 ansible-lint speedtest-cli
 
 # Bash? Who need a bash in 21 century?!
 [ $SHELL != `which zsh` ] && chsh -s `which zsh` $USER
