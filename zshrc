@@ -1,3 +1,7 @@
+if [[ ! -o interactive ]] then
+  exit 0
+fi
+
 export EDITOR=nano
 export PATH="$HOME/bin:$PATH"
 
@@ -92,26 +96,25 @@ if ! zplug check; then
   fi
 fi
 
-if [[ -o interactive ]] then
-  zplug load
+zplug load
 
-  compinit
+compinit
 
-  # Disable clock on right side of shell prompt
-  export RPROMPT=""
+# Disable clock on right side of shell prompt
+export RPROMPT=""
 
-  if zplug check zsh-users/zsh-autosuggestions; then
-    ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down) # Add history-substring-search-* widgets to list of widgets that clear the autosuggestion
-    ZSH_AUTOSUGGEST_CLEAR_WIDGETS=("${(@)ZSH_AUTOSUGGEST_CLEAR_WIDGETS:#(up|down)-line-or-history}") # Remove *-line-or-history widgets from list of widgets that clear the autosuggestion to avoid conflict with history-substring-search-* widgets
-  fi
-
-  # Bind UP and DOWN arrow keys for subsstring search.
-  if zplug check zsh-users/zsh-history-substring-search; then
-    zmodload zsh/terminfo
-    bindkey "$terminfo[cuu1]" history-substring-search-up
-    bindkey "$terminfo[cud1]" history-substring-search-down
-  fi
-
-  bindkey "^[[1;5C" forward-word
-  bindkey "^[[1;5D" backward-word
+if zplug check zsh-users/zsh-autosuggestions; then
+  ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down) # Add history-substring-search-* widgets to list of widgets that clear the autosuggestion
+  ZSH_AUTOSUGGEST_CLEAR_WIDGETS=("${(@)ZSH_AUTOSUGGEST_CLEAR_WIDGETS:#(up|down)-line-or-history}") # Remove *-line-or-history widgets from list of widgets that clear the autosuggestion to avoid conflict with history-substring-search-* widgets
 fi
+
+# Bind UP and DOWN arrow keys for subsstring search.
+if zplug check zsh-users/zsh-history-substring-search; then
+  zmodload zsh/terminfo
+  bindkey "$terminfo[cuu1]" history-substring-search-up
+  bindkey "$terminfo[cud1]" history-substring-search-down
+fi
+
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
