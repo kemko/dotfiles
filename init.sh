@@ -24,7 +24,7 @@ sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
 SOFTWARE="$SOFTWARE sublime-text-installer"
 
 # All other stuff from standard repos
-SOFTWARE="$SOFTWARE whois traceroute tcptraceroute iotop htop mosh gpa meld git zsh python-pip curl httpie xclip grc php7.0-cli php-codesniffer"
+SOFTWARE="$SOFTWARE byobu whois traceroute tcptraceroute iotop htop mosh gpa meld git zsh python-pip curl httpie xclip grc php7.0-cli php-codesniffer"
 
 # Work dependences
 SOFTWARE="$SOFTWARE cmake ccache libssl-dev libreadline-dev zlib1g-dev build-essential ruby-appraiser-rubocop graphicsmagick-libmagick-dev-compat libmagickwand-dev libidn11-dev libldap2-dev libsasl2-dev libxml2-dev libxslt1-dev"
