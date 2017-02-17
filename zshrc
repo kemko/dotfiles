@@ -70,7 +70,7 @@ zplug "so-fancy/diff-so-fancy", as:command
 
 zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "zsh-users/zsh-completions", defer:3
-#zplug "zsh-users/zsh-syntax-highlighting", defer:3
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
 zplug "themes/tjkirch_mod", from:oh-my-zsh, as:theme
 
