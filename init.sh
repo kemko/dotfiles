@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
-
 SOFTWARE=""
-
-wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-echo "deb http://download.virtualbox.org/virtualbox/debian yakkety contrib" | sudo tee /etc/apt/sources.list.d/oracle-virtualbox.list
-SOFTWARE="$SOFTWARE virtualbox-5.1 dkms"
 
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome-beta.list
@@ -27,11 +21,13 @@ SOFTWARE="$SOFTWARE sublime-text-installer"
 SOFTWARE="$SOFTWARE byobu whois traceroute tcptraceroute iotop htop mosh gpa meld git zsh python-pip curl httpie xclip grc php7.0-cli php-codesniffer"
 
 # Work dependences
-SOFTWARE="$SOFTWARE cmake ccache libssl-dev libreadline-dev zlib1g-dev build-essential ruby-appraiser-rubocop graphicsmagick-libmagick-dev-compat libmagickwand-dev libidn11-dev libldap2-dev libsasl2-dev libxml2-dev libxslt1-dev"
+SOFTWARE="$SOFTWARE cmake ccache libssl-dev libreadline-dev zlib1g-dev build-essential graphicsmagick-libmagick-dev-compat libmagickwand-dev libidn11-dev libldap2-dev libsasl2-dev libxml2-dev libxslt1-dev virtualbox docker"
 
 # And now install 'em all
 sudo apt-get -qq update
 sudo apt-get install -y $SOFTWARE
+
+sudo usermod -a -G docker `whoami`
 
 # Install not apt-ed software
 sudo -H pip -q --disable-pip-version-check install ansible==2.2.1.0 ansible-lint speedtest-cli
@@ -45,6 +41,7 @@ sudo -H pip -q --disable-pip-version-check install ansible==2.2.1.0 ansible-lint
 
 [ ! -d ~/bin ] && mkdir ~/bin
 
+~/.dotfiles/install
 ~/.dotfiles/install
 
 echo "Bootstraped"

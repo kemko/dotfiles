@@ -3,7 +3,7 @@ if [[ ! -o interactive ]] then
 fi
 
 export EDITOR=nano
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$PATH:/usr/lib/go-1.8/bin"
 
 export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
