@@ -4,7 +4,7 @@ SOFTWARE=""
 
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-SOFTWARE="$SOFTWARE google-chrome-beta"
+SOFTWARE="$SOFTWARE google-chrome-stable"
 
 wget -q -O - https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu yakkety stable" | sudo tee /etc/apt/sources.list.d/docker.list
@@ -20,6 +20,9 @@ SOFTWARE="$SOFTWARE atom"
 
 sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
 SOFTWARE="$SOFTWARE sublime-text-installer"
+
+sudo add-apt-repository -y ppa:webupd8team/tor-browser
+SOFTWARE="$SOFTWARE tor-browser"
 
 # All other stuff from standard repos
 SOFTWARE="$SOFTWARE byobu whois traceroute tcptraceroute iotop htop mosh gpa meld git zsh python-pip curl httpie xclip grc php7.0-cli php-codesniffer"
