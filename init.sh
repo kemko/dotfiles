@@ -3,8 +3,12 @@
 SOFTWARE=""
 
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome-beta.list
+echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
 SOFTWARE="$SOFTWARE google-chrome-beta"
+
+wget -q -O - https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu yakkety stable" | sudo tee /etc/apt/sources.list.d/docker.list
+SOFTWARE="$SOFTWARE docker-ce docker-compose"
 
 sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
 echo "deb http://linux.dropbox.com/ubuntu trusty main" | sudo tee /etc/apt/sources.list.d/dropbox.list
