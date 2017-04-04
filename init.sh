@@ -28,7 +28,7 @@ SOFTWARE="$SOFTWARE tor-browser"
 SOFTWARE="$SOFTWARE byobu whois traceroute tcptraceroute iotop htop mosh gpa meld git zsh python-pip curl httpie xclip grc php7.0-cli php-codesniffer"
 
 # Work dependences
-SOFTWARE="$SOFTWARE cmake ccache libssl-dev libreadline-dev zlib1g-dev build-essential graphicsmagick-libmagick-dev-compat libmagickwand-dev libidn11-dev libldap2-dev libsasl2-dev libxml2-dev libxslt1-dev virtualbox docker"
+SOFTWARE="$SOFTWARE cmake ccache libssl-dev libreadline-dev zlib1g-dev build-essential graphicsmagick-libmagick-dev-compat libmagickwand-dev libidn11-dev libldap2-dev libsasl2-dev libxml2-dev libxslt1-dev virtualbox docker graphviz libpq-dev"
 
 # And now install 'em all
 sudo apt-get -qq update
