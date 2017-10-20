@@ -3,7 +3,7 @@ if [[ ! -o interactive ]] then
 fi
 
 export EDITOR=nano
-export PATH="$HOME/bin:$PATH:/usr/lib/go-1.8/bin"
+export PATH="$HOME/bin:$PATH"
 
 export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
@@ -28,6 +28,7 @@ COMPLETION_WAITING_DOTS="true"
 APPEND_HISTORY="true"
 
 [ -x /usr/bin/grc ] && alias ping="grc --colour=auto ping"
+[ -x /usr/bin/atom-beta ] && alias atom=atom-beta
 
 alias ls="ls --color=auto"
 alias du="du -hc"

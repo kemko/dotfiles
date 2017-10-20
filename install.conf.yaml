@@ -6,19 +6,8 @@
   - '~'
   - ~/.*'
 
-- shell:
-  - [git reset --hard && git pull --rebase]
-  - [git submodule update --init --recursive --remote, Installing submodules]
-  - [mkdir -p rbenv/plugins, create rbenv/plugins]
-
 - link:
     ~/.gitconfig: gitconfig
 
     ~/.zshrc: zshrc
     ~/.zplug: zplug
-
-    ~/.rbenv: rbenv/
-    ~/.rbenv/plugins/ruby-build: ruby-build/
-    ~/.rbenv/plugins/rbenv-gemset: rbenv-gemset/
-    ~/.rbenv/plugins/rbenv-bundler: rbenv-bundler/
-    ~/.rbenv/plugins/rbenv-ccache: rbenv-ccache/
