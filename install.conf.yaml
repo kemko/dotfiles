@@ -8,5 +8,5 @@
 
 - link:
     ~/.gitconfig: gitconfig
-
     ~/.zshrc: zshrc
+    ~/.zprofile: zprofile
