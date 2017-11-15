@@ -3,7 +3,7 @@ if [[ ! -o interactive ]] then
 fi
 
 export EDITOR=nano
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
 export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
